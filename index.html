@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .hotel {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            background: #fff;
+            border-radius: 5px;
+            text-align: left;
+        }
+        button {
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .details {
+            display: none;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            margin-top: 10px;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 80%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Hotel Booking</h1>
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Search hotels by city..." onkeyup="filterHotels()">
+        </div>
+        
+        <div class="hotel" data-city="mumbai">
+            <h2>Hotel Taj</h2>
+            <p>Location: Mumbai</p>
+            <button onclick="showDetails('taj')">View Details</button>
+            <button onclick="bookHotel('Hotel Taj')">Book Now</button>
+            <div id="taj" class="details">
+                <p>Price: ₹5000 per night</p>
+                <p>Facilities: Free WiFi, Swimming Pool, Breakfast</p>
+            </div>
+        </div>
+
+        <div class="hotel" data-city="delhi">
+            <h2>Hotel Oberoi</h2>
+            <p>Location: Delhi</p>
+            <button onclick="showDetails('oberoi')">View Details</button>
+            <button onclick="bookHotel('Hotel Oberoi')">Book Now</button>
+            <div id="oberoi" class="details">
+                <p>Price: ₹6000 per night</p>
+                <p>Facilities: Free Parking, Gym, Spa</p>
+            </div>
+        </div>
+
+        <div class="hotel" data-city="lucknow">
+            <h2>Hotel ramada</h2>
+            <p>Location: lucknow</p>
+            <button onclick="showDetails('ramada')">View Details</button>
+            <button onclick="bookHotel('Hotel ramada')">Book Now</button>
+            <div id="ramada" class="details">
+                <p>Price: ₹5500 per night</p>
+                <p>Facilities: Bar, Airport Shuttle, Restaurant</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function bookHotel(hotelName) {
+            alert('You have booked ' + hotelName + '!');
+        }
+
+        function showDetails(id) {
+            var details = document.getElementById(id);
+            if (details.style.display === "none" || details.style.display === "") {
+                details.style.display = "block";
+            } else {
+                details.style.display = "none";
+            }
+        }
+
+        function filterHotels() {
+            let input = document.getElementById("search").value.toLowerCase();
+            let hotels = document.querySelectorAll(".hotel");
+            
+            hotels.forEach(hotel => {
+                let city = hotel.getAttribute("data-city");
+                if (city.includes(input)) {
+                    hotel.style.display = "block";
+                } else {
+                    hotel.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
